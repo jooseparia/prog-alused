@@ -1,0 +1,75 @@
+import random
+
+def make_hola_string(count: int) -> str:
+    """
+    Make hola string.
+
+    print(make_hola_string(3)) => "holaholahola"
+    print(make_hola_string(0)) => ""
+    """
+    return "hola" * count
+
+def generate_string_with_random_length(threshold: float) -> str:
+    """
+    Generate a string of "-" until a random number is below the threshold.
+
+    Use random.random() to generate a random float.
+    If the random number is below the threshold, add "-" to the result.
+    If the random number is greater than or equal to the threshold, finish the loop.
+
+    generate_string_with_random_length(0.9) => "-----" (result can vary)
+    generate_string_with_random_length(0.5) => "-" (usually empty or 1 minus)
+    """
+    result = ""
+    while random.random() < threshold:
+        result += "-"
+    return result
+
+def ask_user_age(age_limit: int) -> int:
+    """
+    Ask the user's age and return a valid age.
+
+    The age is correct if:
+    - It is numeric (answering "a" is not correct).
+    - It is greater than or equal to the age_limit.
+    - It is less than or equal to 100.
+
+    This function will repeatedly ask for the user's age until a correct age is entered.
+
+    Warnings are printed out for incorrect input:
+    - Non-numeric input: "Wrong input!"
+    - Age < age_limit: "Too young!"
+    - Age > 100: "Too old!"
+
+    An example (with age_limit 18):
+    What is your age? a
+    Wrong input!
+    What is your age? 10
+    Too young!
+    What is your age? 101
+    Too old!
+    What is your age? 21
+
+    (function returns 21)
+    """
+    while True:
+        age_str = input("What is your age? ")
+        if age_str.isdigit():
+            age = int(age_str)
+            if age >= age_limit and age <= 100:
+                return age
+            elif age < age_limit:
+                print("Too young!")
+            else:
+                print("Too old!")
+        else:
+            print("Wrong input!")
+
+# You can call the functions like this:
+# age_limit = 18
+# valid_age = ask_user_age(age_limit)
+# print("Valid age:", valid_age)
+# hola_string = make_hola_string(3)
+# print("Hola String:", hola_string)
+# random_string = generate_string_with_random_length(0.9)
+# print("Random String:", random_string)
