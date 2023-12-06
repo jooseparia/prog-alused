@@ -1,4 +1,4 @@
-"""File Operations."""
+"""File operations."""
 import csv
 
 
@@ -17,37 +17,37 @@ def read_file_contents(filename: str) -> str:
 
 def read_file_contents_to_list(filename: str) -> list:
     r"""
-    Read file contents into a list of lines.
+    Read file contents into list of lines.
 
     In this exercise, we can assume the file exists.
     Each line from the file should be a separate element.
     The order of the list should be the same as in the file.
 
-    List elements should not contain a new line (\n).
+    List elements should not contain new line (\n).
 
     :param filename: File to read.
     :return: List of lines.
     """
     with open(filename, 'r') as file:
-        return file.read().splitlines()
+        return file.read(). splitlines()
 
 
 def read_csv_file(filename: str) -> list:
     """
-    Read CSV file into a list of rows.
+    Read CSV file into list of rows.
 
     Each row is also a list of "columns" or fields.
 
     CSV (Comma-separated values) example:
     name,age
-    mati,12
-    mari,14
+    john,12
+    mary,14
 
     Should become:
     [
       ["name", "age"],
-      ["mati", "12"],
-      ["mari", "14"]
+      ["john", "12"],
+      ["mary", "14"]
     ]
 
     Use csv module.
@@ -56,15 +56,15 @@ def read_csv_file(filename: str) -> list:
     :return: List of lists.
     """
     with open(filename, 'r') as file:
-        reader = csv.reader(file)
-        return [row for row in reader]
+        csv_reader = csv.reader(file)
+        return [row for row in csv_reader]
 
 
 def write_contents_to_file(filename: str, contents: str) -> None:
     """
-    Write contents to a file.
+    Write contents to file.
 
-    If the file does not exist, create it.
+    If the file does not exists, create it.
 
     :param filename: File to write to.
     :param contents: Content to write to.
@@ -76,15 +76,15 @@ def write_contents_to_file(filename: str, contents: str) -> None:
 
 def write_lines_to_file(filename: str, lines: list) -> None:
     """
-    Write lines to a file.
+    Write lines to file.
 
-    Lines are a list of strings, each representing a separate line in the file.
+    Lines is a list of strings, each represents a separate line in the file.
 
-    There should be no new line at the end of the file,
-    unless the last element itself ends with the new line.
+    There should be no new line in the end of the file.
+    Unless the last element itself ends with the new line.
 
     :param filename: File to write to.
-    :param lines: List of strings to write to the file.
+    :param lines: List of string to write to the file.
     :return: None
     """
     with open(filename, 'w') as file:
@@ -93,33 +93,31 @@ def write_lines_to_file(filename: str, lines: list) -> None:
 
 def write_csv_file(filename: str, data: list) -> None:
     """
-    Write data into a CSV file.
+    Write data into CSV file.
 
     Data is a list of lists.
-    Each element (which is a list itself) represents columns in a line.
+    List represents lines.
+    Each element (which is list itself) represents columns in a line.
 
-    [["name", "age"], ["mati", "11"], ["mari", "15"]]
-    Will result in a CSV file:
+    [["name", "age"], ["john", "11"], ["mary", "15"]]
+    Will result in csv file:
 
     name,age
-    mati,11
-    mari,15
+    john,11
+    mary,15
 
-    Use the csv module here.
+    Use csv module here.
 
     :param filename: Name of the file.
     :param data: List of lists to write to the file.
     :return: None
     """
     with open(filename, 'w', newline='') as file:
-        writer = csv.writer(file)
-        writer.writerows(data)
+        csv_writer = csv.writer(file)
+        csv_writer.writerows(data)
 
 
 def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv_output_filename: str) -> None:
-
-    dates_data = read_file_contents_to_list(dates_filename)
-    towns_data = read_file_contents_to_list(towns_filename)
     """
     Merge information from two files into one CSV file.
 
@@ -164,6 +162,8 @@ def merge_dates_and_towns_into_csv(dates_filename: str, towns_filename: str, csv
     :param csv_output_filename: Output CSV-file with names, towns, and dates.
     :return: None
     """
+    dates_data = read_file_contents_to_list(dates_filename)
+    towns_data = read_file_contents_to_list(towns_filename)
 
     merged_data = [['name', 'town', 'date']]
 
